@@ -1,0 +1,24 @@
+---
+title: "polls"
+author: "hannah hess"
+date: "October 1, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+x <- read_csv("polls_IT-parliament_2018-10.csv")
+```
+
+```{r, message = FALSE}
+ y<- x %>% 
+  select(date, firm, n, LN, M5S, PD, FIPDLFI) %>% 
+   gather("party", "percentage", LN:FIPDLFI) 
+
+y%>% 
+    ggplot(aes(x= date, y = percentage, color = party)) + geom_smooth() + geom_point(alpha = .1)
+
+   
+```
+
